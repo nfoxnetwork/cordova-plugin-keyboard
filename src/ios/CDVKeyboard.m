@@ -201,7 +201,12 @@ static IMP WKOriginalImp;
     }
 
     // A view's frame is in its superview's coordinate system so we need to convert again
-    self.webView.frame = [self.webView.superview convertRect:screen fromView:self.webView];
+    CGRect webViewBounds = [self.webView.superview convertRect:screen fromView:self.webView];
+
+    NSInteger offset = 50;
+    webViewBounds.origin.y += offset;
+    webViewBounds.size.height -= offset;
+    self.webView.frame = webViewBounds; 
 }
 
 #pragma mark UIScrollViewDelegate
